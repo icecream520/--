@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../ext-6.0.1/resources/css/ext-all.css"/>
+  <script type="text/javascript" src="../ext-6.0.1/bootstrap.js"></script>
+  <script type="text/javascript" src="../ext-6.0.1/locale/Ext-lang-zh_CN.js"></script>
+  <script type="text/javascript" src="../jquery-3.1.0.js"> </script>
+  <script type="text/javascript">
+  //在此添加函数
+  $(function(){
+    var name = "The Windows";
+    var objecte =
+    {
+      name :"My object",
+      getNameFunc:function()
+      {
+        return function()
+        {
+          return this.name+"0";
+        };
+      }
+    };
+    alert(objecte.getNameFunc()());
+  })
+  </script>
+  <style type="text/css">
+  /*在此添加样式代码*/
+  </style>
+ </head>
+ <body>
+  <!--在此添加HTML代码-->
+<script>
+var name = "The Windows";
+var objecte =
+{
+  name :"My object",
+  getNameFunc:function()
+  {
+    return function()
+    {
+      return this.name+"1";
+    };
+  }
+};
+alert(objecte.getNameFunc()());
+</script>
+<script>
+var name = "The Windows";
+var objecte =
+{
+  name :"My object",
+  getNameFunc:function()
+  {
+    var that = this;
+    return function()
+    {
+      return that.name+"2";
+    };
+  }
+};
+alert(objecte.getNameFunc()());
+</script>
+ </body>
+</html>

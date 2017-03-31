@@ -1,0 +1,34 @@
+1.字符串  TO_CHAR(列|日期|数字，转换格式)    将日期或数字格式化为指定结构的字符串
+2.日期 TO_DATE(列|字符串，转换格式)  按照指定的转换格式编写为字符串后将其变为日期型数据
+3.数字 TO_NUMBER(列|字符串)        将字符串变为数字     
+**转变字符串函数TO_CHAR()**
+如果将一个日期或者数字变为字符串，那么首先必须清楚转换格式
+  ·日期：年（yyyy）、月（mm）、日（dd）;
+  ·时间：时（hh、hh24）、分（mi）、秒（ss）;
+  ·数字：任意数字（9）、本地货币（L）。
+ 在之前一直强调SYSDATE有时间和日期
+SELECT TO_CHAR(SYSDATE,'yyyy-mm-dd hh:mi:ss')FROM dual;
+SELECT TO_CHAR(SYSDATE,'yyyy-mm-dd hh24:mi:ss')FROM dual;
+TO_CHAR实现日期的拆分
+SELECT TO_CHAR(SYSDATE,'yyyy'),TO_CHAR（SYSDATE,'mm'）,TO_CHAR(SYSDATE,'dd') FROM dual;
+SELECT * FROM emp WHERE TO_CHAR(hiredate,'mm')=2;
+ORACLE数据可以自动转换
+SELECT TO_CHAR (1231231，'L999,999,999')FROM dual;//格式化数字
+SELECT TO_DATE('1889-10-19','yyyy-mm-dd')FROM dual;//转日期函数
+SELECT TO_NUMBER('1')+ TO_NUMBER('2') FROM dual;
+SELECT '1'+ '2' FROM dual;
+SELECT 1+ 2 FROM dual;
+---------------------------------------通用函数--------------------
+ORACLE特色函数主要两个
+1. 数字NVL(列|NULL，默认值)  如果传入的内容是null,则使用默认数值处理，如果不为空则使用原始数值。
+2. 数据类型DECODE（列|字符串|数值，比较内容）
+  1.显示内容1，比较内容2，显示内容2，...[默认显示内容]  设置的内容会与每一个比较内容进行比较，如果内容相同
+                                                         则会使用显示内容进行输出，如果都不相同，则使用最后的默认信息输出。
+1.处理null的函数
+SELECT empno,ename,sal,comm,(sal+comm)*12 FROM emp;//因为佣金为null所做的计算结构都为空。
+SELECT null +1 FROM dual;
+SELECT empno,ename,sal,comm,(sal+NVL(comm,0))*12 FROM emp;//将null替换为0
+2.decode()函数
+decode()函数类似于程序的if..else感觉，但是与if..else不同的是不能判断关系只能判断内容是否相同
+SELECT ename,job,DECODE(job,'CLERK','办事员','---')FROM emp;//先进行比较，比较之后再输出
+ 在一些笔试里面,decode()函数进行比较

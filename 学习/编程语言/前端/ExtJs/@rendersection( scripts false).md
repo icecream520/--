@@ -1,0 +1,2 @@
+Razor 不是编程语言。它是服务器端标记语言。
+模板页：@RenderBody()占位符；局部页面：@RenderPage()；模板页预设区域：@RenderSection("")在Razor引擎中没有了“母版页”，取而代之的是叫做“布局”的页面（_Layout。cshtml）放在了共享视图文件夹中。模板页：@RenderBody()占位符；局部页面：@RenderPage()；模板页预设区域：@RenderSection("")

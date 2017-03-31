@@ -1,0 +1,56 @@
+--------------------------SQL1999语法--------------------
+SELECT [DISTINCT] *|列[别名]
+FROM 表名称 1
+    [CROSS JOIN 表名称 2]
+    [NATURAL JOIN 表名称 2]
+    [JOIN 表名称 ON（条件）|USING（字段）]
+    [LEFT|RIGHT|FULL OUTER JOIN 表名称2]
+1.交叉连接：CROSS JOIN,主要功能产生笛卡尔积，简单的实现多表查询
+SELECT *FROM emp CROSS JOIN dept;
+2.自然连接：NATURAL JOIN，自动使用关联字段消除笛卡尔积（一般关联字段是外键，但以名字相同为主,相同名字的就关联）。
+属于内连接
+   再换回查询结果的时候，默认情况下将关联字段设置在第一列上，重复内容不再显示
+SELECT * FROM emp NATURAL JOIN dept;
+3.USING字句：如果一张表里有多个关联字段，使用USING字句设置关联字段
+SELECT * FROM emp JOIN dept USING(deptno);
+4.ON 如果没有关联字段，用ON字句设置关联条件
+SELECT * FROM emp e JOIN salgrade s ON(e.sal BETWEEN s.losal AND s.hisal);
+5.外连接
+左外连接
+SELECT * FROM emp LEFT OUTER JOIN dept USING(deptno);
+右外连接
+SELECT * FROM emp RIGHT OUTER JOIN dept USING(deptno);
+全外连接
+SELECT * FROM emp FULLOUTER JOIN dept USING(deptno)
+------------------------------------数据集合操作-------------------
+数据集合操作符：UNION、UNIONALL、INTERSECT、MINUS
+可以实现多个查询语句连接
+1.UNION操作
+SELECT empno,ename,job FROM emp WHERE deptno = 10
+UNION
+SELECT empno,ename,job FROM emp;
+将查询结果合并在一起，如果遇见了相同内容，不会重复显示。
+2.UNIONALL操作
+SELECT empno,ename,job FROM emp WHERE deptno = 10
+UNION ALL
+SELECT empno,ename,job FROM emp;
+所有重复数据都会进行显示。
+3.INTERSECT操作
+SELECT empno,ename,job FROM emp WHERE deptno = 10
+INTERSECT
+SELECT empno,ename,job FROM emp;
+返回了相同的数据部分，属于交集操作。
+4.MINUS操作
+SELECT empno,ename,job FROM emp 
+MINUS
+SELECT empno,ename,job FROM emp WHERE deptno = 10;
+差集，得到的结果是第一个集合减去第二个集合
+总结：
+1、多表查询都存在着笛卡尔积。
+2、多表查询是都必须要有关联字段或关联条件
+3、可以使用集合操作将多个查询结果返回的结构必须相同。（列数)
+SELECT empno,job FROM emp 
+UNION
+SELECT empno,ename FROM emp WHERE deptno = 10;
+4、大部分情况下都使用的是内连接操作，外连接Oracle提供的是“+”
+5、在Oracle之外的数据库（SQL Server、MySQL）利用SQL:1999

@@ -1,0 +1,1 @@
+DNS类是一个静态类,它从Internet域名系统（DNS）检索关于特定主机的信息。在IPHostEntry类的实例中返回来自DNS查询的主机信息，如果指定的主机在DNS数据库中有多个入口，则IPHostEntry包含多个IP地址和别名。Dns类的主要成员函数为GetHostName，GetHostAddresses，GetHostEntry，GetHostByName，GetHostByAddress。分别可取得计算机名称，IP地址和地址信息。   

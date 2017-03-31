@@ -1,0 +1,13 @@
+SELECT * FROM emp WHERE ename=UPPER('&inputname');
+SELECT ename ,INITCAP（ename）FROM emp;
+SELECT * FROM emp WHERE LENGTH(ename)=5;
+SELECT SUBSTR('helloworld',0,5)FROM dual;
+SELECT ename,SUBSTR(ename,1,3)FROM emp; 
+SELECT ename,SUBSTR(ename,LENGTH(ename)-2)FROM emp; 
+SELECT ename,SUBSTR(ename,-3)FROM emp; 
+NO.     函数名称                                  描述
+1.     数字 ROUND（列|数字[，小数位]）         实现数据的四舍五入
+2.     数字 TRUNC（列|数字[，小数位）          实现数据的截取，即不进位
+3.     数字 MOD（列|数字，列|数字）            求模（计算余数）
+SELECT ROUND（789.5671234） FROM dual;
+如果没有设置小数点的保留尾数，那么会直接不保留小数位数进行进位。

@@ -1,0 +1,29 @@
+SELECT ROUND（12312.123123,2）FROM dual;
+SELECT ROUND（12312.123123,-2）FROM dual;
+求模函数
+SELECT MOD （10,3）FROM dual;
+SELECT SYSDATE FROM dual;
+SELECT SYSTIMESTAMP FROM dual;
+SELECT SYSDATE-7 ,SYSDATE+120 FROM dual;
+对于日期而言，由于每个月的天数是不同的，所以直接进行天数加法实现月数的计算时不准确的.
+SELECT empno,ename,job,SYSDATE- hiredate FROM emp;
+NO     函数名称                               描述
+1      日期ADD_MONTHS(列|日期，月数)          在指定的日期上增加若干个月之后的日期
+2      数字MONTHS_BETWEEN(列|日期，列|日期)   返回两个日期直接的所经历月数
+3      日期LAST_DAY(列|日期)                   取得指定日期的最后一天
+4      日期NEXT_DAY(列|日期)                   返回下一个一周时间数指定的日期
+计算所有雇员到今天为止的月数
+SELECT empno,ename,hiredate,ROUND(MONTHS_BETWEEN(SYSDATE,hiredate)) FROM emp;
+计算当前时间所在月的最后一天日期;
+SELECT LAST_DAY（SYSDATE）FROM dual;
+要求查询所有在雇佣所在月倒数第三天雇佣的雇员信息;
+SELECT hiredate,ename, LAST_DAY(hiredate)-2 FROM emp WHERE hiredate=LAST_DAY(hiredate)-2; 
+SELECT  LAST_DAY(hiredate)-2 FROM emp WHERE hiredate=LAST_DAY(hiredate)-2; 
+SELECT  * FROM emp WHERE hiredate=LAST_DAY(hiredate)-2;
+利用日期函数的操作是最准确的。
+SELECT NEXT_DAY(SYSDATE,'星期二')FROM dual;//现在到下一个这个星期
+例子：要求以年、月、日的方式计算出雇员到现在为止的雇佣年限。
+SELECT empno,ename,hiredate,TRUNC(MONTHS_BETWEEN(SYSDATE,hiredate)/12)year,
+                            TRUNC(MOD(MONTHS_BETWEEN(SYSDATE,hiredate),12))months,
+                            TRUNC(SYSDATE-ADD_MONTHS(hiredate,MONTHS_BETWEEN(SYSDATE,hiredate)))day
+FROM emp;

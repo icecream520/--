@@ -1,0 +1,38 @@
+-------------------------------------分组统计---------------------
+1.统计函数
+·统计个数：COUNT(*|[DISTINCT]字段)函数；
+·MAX（字段）、MIN（字段）；
+·SUM（数字字段）、AVG(数字字段)。
+查询所有雇员的最高和最低工资
+SELECT MAX(sal),MIN(sal)FROM emp;
+除了数字之外也可用于日期
+SELECT MAX(hiredate),MIN(hiredate)FROM emp;
+统计雇员总工资及平均工资
+SELECT SUM(sal),AVG(sal)FROM emp;//数值型数据都可以使用
+统计出雇员的平均服务年限
+SELECT TRUNC(AVG(MONTHS_BETWEEN(SYSDATE,hiredate)/12))FROM emp;
+COUNT(*)返回数据表中数据个数
+COUNT(字段)统计数据不为null的数据个数，
+COUNT(DISTINCT字段)统计消除重复数据之后的数据个数
+-----------------------------------分组查询------------------
+分组统计查询往往指的是部分数据具备某些共性
+④控制要显示的数据列 SELECT[DISTINCT]*|列名称[别名]
+①确定数据来源 FROM 表名称[别名] 
+②确定满足条件的数据行 [WHERE 过滤条件（s）] 
+③针对数据实现分组 GROUP BY 分组字段，分组字段
+⑤针对数据结构进行排序 ORDER BY 字段[ASC|DESC],...
+例：按照职业分组，统计出每个职位的名称、平均人数。平均工资
+SELECT job,COUNT(empno),AVG(sal)
+FROM emp
+GROUP BY job;
+例：查询出每个部门标号，以及每个部门人数、最高最低工资。
+SELECT deptno,COUNT(empno),MAX(sal),MIN(sal)
+FROM emp
+GROUP BY deptno;
+job 和 emp 都存在重复数据
+限制1：在没有编写GROUP BY 字句的时候（全表作为一组）,SELECT字句之中只允许
+出现统计函数，不允许出现任何的其他字段：
+错误的代码	正确的代码
+SELCET COUNT（emono）,ename FROM emp;	SELCET COUNT（emono）FROM emp
+
+限制2：在使用GROUP BY 字句分组的时候，SELECT字句之中只允许
