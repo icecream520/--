@@ -11,3 +11,7 @@ os.execute("cls")
 
 
 --在Lua中,默认声明变量为全局变量,以local为修饰符的为局部变量,局部变量只在所属语句的块内生效
+
+--Lua中的库有math,string,table,input/output & operating system facilities
+
+--Lua扩展类库
